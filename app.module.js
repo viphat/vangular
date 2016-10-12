@@ -14,6 +14,7 @@ var app_component_1 = require('./app.component');
 var races_component_1 = require('./races.component');
 var race_service_1 = require('./services/race.service');
 var api_service_1 = require('./services/api.service');
+var IS_PRODUCTION = false;
 var AppModule = (function () {
     function AppModule() {
     }
@@ -23,7 +24,14 @@ var AppModule = (function () {
             declarations: [app_component_1.PonyRacerAppComponent, races_component_1.RacesComponent],
             providers: [
                 api_service_1.ApiService,
-                race_service_1.RaceService,
+                {
+                    provide: race_service_1.RaceService,
+                    useFactory: function (apiService) { return IS_PRODUCTION ? new race_service_1.RaceService(apiService) : new FakeRaceService(); },
+                    deps: [api_service_1.ApiService]
+                },
+                //NOTE: Be careful, the order of the parameters should be the same as the order in the array if you have several dependencies!
+                //The dependencies declared in the root injector are available for every component in the app. For example, ApiService and RaceService can be used everywhere
+                //If you declare a dependency in the module of your app and in the providers attribute of your component (mean you have declared it twice, one in parent injector and one in current injector), there will be two distinct instances of this dependency created and used
                 { provide: 'RaceServiceAlternative', useClass: race_service_1.RaceService }
             ],
             bootstrap: [app_component_1.PonyRacerAppComponent]
@@ -33,4 +41,12 @@ var AppModule = (function () {
     return AppModule;
 }());
 exports.AppModule = AppModule;
+var FakeRaceService = (function () {
+    function FakeRaceService() {
+    }
+    FakeRaceService.prototype.list = function () {
+        return [{ name: 'Quế Hương' }];
+    };
+    return FakeRaceService;
+}());
 //# sourceMappingURL=app.module.js.map
