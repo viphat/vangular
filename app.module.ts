@@ -5,6 +5,7 @@ import { PonyRacerAppComponent } from './app.component';
 import { RacesComponent } from './races.component';
 import { RaceService } from './services/race.service';
 import { ApiService } from './services/api.service';
+import { FromNowPipe } from './fromNow.pipe';
 
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 
@@ -12,7 +13,7 @@ const IS_PRODUCTION = false;
 
 @NgModule({
   imports: [BrowserModule],
-  declarations: [PonyRacerAppComponent, RacesComponent],
+  declarations: [PonyRacerAppComponent, RacesComponent, FromNowPipe],
   providers: [
     ApiService,
     {

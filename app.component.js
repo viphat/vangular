@@ -8,25 +8,25 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var core_1 = require('@angular/core');
-var race_service_1 = require('./services/race.service');
+var core_1 = require("@angular/core");
+var race_service_1 = require("./services/race.service");
 var PonyRacerAppComponent = (function () {
     function PonyRacerAppComponent(raceService) {
         this.raceService = raceService;
         this.numberOfUsers = 146;
-        this.user = { name: 'Quế Hương' };
+        this.user = { name: 'Quế Hương', createdAt: new Date() };
     }
     PonyRacerAppComponent.prototype.list = function () {
         return this.raceService.list();
     };
-    PonyRacerAppComponent = __decorate([
-        core_1.Component({
-            selector: 'ponyracer-app',
-            template: "\n    <h1>PonyRacer</h1>\n    <p [textContent]=\"'Welcome ' + user?.name\"></p>\n    <p>{{ list() }}</p>\n    <ns-races></ns-races>\n  "
-        }), 
-        __metadata('design:paramtypes', [race_service_1.RaceService])
-    ], PonyRacerAppComponent);
     return PonyRacerAppComponent;
 }());
+PonyRacerAppComponent = __decorate([
+    core_1.Component({
+        selector: 'ponyracer-app',
+        template: "\n    <h1>PonyRacer</h1>\n    <p [textContent]=\"'Welcome ' + user?.name\"></p>\n    <p [textContent]=\" user.createdAt | fromNow \"></p>\n    <p>{{ list() | json }}</p>\n    <ns-races></ns-races>\n  "
+    }),
+    __metadata("design:paramtypes", [race_service_1.RaceService])
+], PonyRacerAppComponent);
 exports.PonyRacerAppComponent = PonyRacerAppComponent;
 //# sourceMappingURL=app.component.js.map

@@ -14,6 +14,7 @@ var app_component_1 = require('./app.component');
 var races_component_1 = require('./races.component');
 var race_service_1 = require('./services/race.service');
 var api_service_1 = require('./services/api.service');
+var fromNow_pipe_1 = require('./fromNow.pipe');
 var IS_PRODUCTION = false;
 var AppModule = (function () {
     function AppModule() {
@@ -21,7 +22,7 @@ var AppModule = (function () {
     AppModule = __decorate([
         core_1.NgModule({
             imports: [platform_browser_1.BrowserModule],
-            declarations: [app_component_1.PonyRacerAppComponent, races_component_1.RacesComponent],
+            declarations: [app_component_1.PonyRacerAppComponent, races_component_1.RacesComponent, fromNow_pipe_1.FromNowPipe],
             providers: [
                 api_service_1.ApiService,
                 {
